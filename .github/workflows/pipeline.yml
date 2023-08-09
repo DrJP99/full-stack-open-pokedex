@@ -61,6 +61,7 @@ jobs:
       - name: render
         run: curl https://api.render.com/deploy/${{secrets.RENDER_SERVICE}}?key=${{secrets.RENDER_API_KEY}}
   discord_webhook:
+    if: always()
     needs: [simple_deployment_pipeline, tag_release, render_deploy]
     runs-on: ubuntu-20.04
     steps:
