@@ -40,10 +40,11 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-  # render_deploy:
-  #   needs: simple_deployment_pipeline
-  #   runs-on: ubuntu-20.04
-  #   if: github.event.action != 'open'
-  #   steps:
-  #     - name: render
-  #       run: curl https://api.render.com/deploy/${{secrets.RENDER_SERVICE}}?key=${{secrets.RENDER_API_KEY}}
+  render_deploy:
+    needs: simple_deployment_pipeline
+    runs-on: ubuntu-20.04
+    if: github.event.action != 'opened'
+    steps:
+      - name: render
+        run: echo "want to deploy with render"
+        # run: curl https://api.render.com/deploy/${{secrets.RENDER_SERVICE}}?key=${{secrets.RENDER_API_KEY}}
