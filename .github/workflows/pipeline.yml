@@ -44,13 +44,11 @@ jobs:
     runs-on: ubuntu-20.04
     if: ${{ github.ref_name == 'master' }}
     steps:
-      - name: GITHUB TOKEN
-        run: echo ${{secrets.GITHUB_TOKEN}}
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.55.0
+        uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # DEFAULT_BUMP: minor
+          DEFAULT_BUMP: patch
   render_deploy:
     needs: simple_deployment_pipeline
     runs-on: ubuntu-20.04
