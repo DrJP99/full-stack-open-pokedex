@@ -1,6 +1,5 @@
 name: Deployment pipeline
 
-#some change...
 on:
   push:
     branches:
@@ -46,5 +45,4 @@ jobs:
     if: github.event.action != 'opened'
     steps:
       - name: render
-        run: echo "want to deploy with render"
-        # run: curl https://api.render.com/deploy/${{secrets.RENDER_SERVICE}}?key=${{secrets.RENDER_API_KEY}}
+        run: curl https://api.render.com/deploy/${{secrets.RENDER_SERVICE}}?key=${{secrets.RENDER_API_KEY}}
