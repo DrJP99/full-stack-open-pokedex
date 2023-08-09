@@ -42,17 +42,19 @@ jobs:
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
-    if: ${{github.ref_name == 'master'}}
+    if: ${{ github.ref_name == 'master' }}
     steps:
+      - name: GITHUB TOKEN
+        run: echo ${{secrets.GITHUB_TOKEN}}
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.55.0
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # DEFAULT_BUMP: minor
   render_deploy:
     needs: simple_deployment_pipeline
     runs-on: ubuntu-20.04
-    if: ${{github.event_name == 'push'}}
+    if: ${{ github.event_name == 'push' }}
     steps:
       - name: render
         run: curl https://api.render.com/deploy/${{secrets.RENDER_SERVICE}}?key=${{secrets.RENDER_API_KEY}}
